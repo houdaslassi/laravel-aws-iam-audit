@@ -1,0 +1,34 @@
+{
+  "name": "houdaslassi/laravel-iam-audit",
+  "description": "Audit your AWS IAM configuration for common security issues, straight from Artisan.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": ["laravel", "aws", "iam", "security", "audit"],
+  "require": {
+    "php": "^8.3",
+    "aws/aws-sdk-php": "^3.300",
+    "illuminate/console": "^12.0|^13.0",
+    "illuminate/support": "^12.0|^13.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^10.0|^11.0",
+    "pestphp/pest": "^3.0|^4.0"
+  },
+  "autoload": {
+    "psr-4": { "IamAudit\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "IamAudit\\Tests\\": "tests/" }
+  },
+  "extra": {
+    "laravel": {
+      "providers": ["IamAudit\\IamAuditServiceProvider"]
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": { "pestphp/pest-plugin": true }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
