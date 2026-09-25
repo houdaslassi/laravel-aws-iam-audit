@@ -19,6 +19,16 @@ enum Severity: string
         };
     }
 
+    public function color(): string
+    {
+        return match ($this) {
+            self::Critical => 'red',
+            self::High => 'bright-red',
+            self::Medium => 'yellow',
+            self::Low => 'gray',
+        };
+    }
+
     public function isAtLeast(self $other): bool
     {
         return $this->weight() >= $other->weight();
