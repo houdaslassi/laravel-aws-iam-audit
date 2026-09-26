@@ -3,7 +3,7 @@
 namespace IamAudit\Commands;
 
 use Aws\Exception\AwsException;
-use Aws\Iam\IamClient;
+use Aws\Exception\CredentialsException;
 use IamAudit\Auditor;
 use IamAudit\Aws\CredentialReport;
 use IamAudit\Checks\RootAccountCheck;
@@ -18,13 +18,13 @@ class AuditCommand extends Command
 
     public function handle(): int
     {
-        $iam = new IamClient([
-            'version' => 'latest',
-            'region' => 'eu-west-1',
-        ]);
-
         try {
+            $iam = app('iam-audit.client');
             $report = CredentialReport::fetch($iam);
+        } catch (CredentialsException $e) {
+            $this->error('No valid AWS credentials found. Check your IAM_AUDIT_* settings or run "aws configure".');
+
+            return self::FAILURE;
         } catch (AwsException $e) {
             $this->error('Could not talk to AWS: '.($e->getAwsErrorMessage() ?? $e->getMessage()));
 
