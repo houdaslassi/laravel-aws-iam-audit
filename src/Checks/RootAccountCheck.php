@@ -3,10 +3,11 @@
 namespace IamAudit\Checks;
 
 use IamAudit\Aws\CredentialReport;
+use IamAudit\Contracts\Check;
 use IamAudit\Data\Finding;
 use IamAudit\Enums\Severity;
 
-final class RootAccountCheck
+final class RootAccountCheck implements Check
 {
     public function run(CredentialReport $report): array
     {
