@@ -4,6 +4,7 @@ namespace IamAudit;
 
 use Aws\Iam\IamClient;
 use IamAudit\Commands\AuditCommand;
+use IamAudit\Commands\PolicyCommand;
 use Illuminate\Support\ServiceProvider;
 
 class IamAuditServiceProvider extends ServiceProvider
@@ -46,6 +47,7 @@ class IamAuditServiceProvider extends ServiceProvider
 
             $this->commands([
                 AuditCommand::class,
+                PolicyCommand::class,
             ]);
         }
     }
