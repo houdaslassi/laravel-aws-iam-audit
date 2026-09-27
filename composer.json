@@ -1,9 +1,15 @@
 {
   "name": "houdaslassi/laravel-aws-iam-audit",
-  "description": "Audit your AWS IAM configuration for common security issues, straight from Artisan.",
+  "description": "Generate least-privilege AWS IAM policies for your Laravel app and audit your AWS account, right from Artisan.",
   "type": "library",
   "license": "MIT",
-  "keywords": ["laravel", "aws", "iam", "security", "audit"],
+  "keywords": ["laravel", "aws", "iam", "s3", "security", "least-privilege", "policy", "audit"],
+  "homepage": "https://github.com/houdaslassi/laravel-aws-iam-audit",
+  "authors": [
+    {
+      "name": "Houda Slassi"
+    }
+  ],
   "require": {
     "php": "^8.3",
     "aws/aws-sdk-php": "^3.300",
@@ -24,6 +30,9 @@
     "laravel": {
       "providers": ["IamAudit\\IamAuditServiceProvider"]
     }
+  },
+  "scripts": {
+    "test": "pest"
   },
   "config": {
     "sort-packages": true,
