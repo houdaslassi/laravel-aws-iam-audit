@@ -146,21 +146,21 @@ Output:
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "ListS3Bucket",
-            "Effect": "Allow",
-            "Action": ["s3:ListBucket"],
-            "Resource": "arn:aws:s3:::my-app-files"
-        },
-        {
-            "Sid": "ManageS3Objects",
-            "Effect": "Allow",
-            "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
-            "Resource": "arn:aws:s3:::my-app-files/*"
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListS3Bucket",
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": "arn:aws:s3:::my-app-files"
+    },
+    {
+      "Sid": "ManageS3Objects",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+      "Resource": "arn:aws:s3:::my-app-files/*"
+    }
+  ]
 }
 ```
 
@@ -361,14 +361,7 @@ In IAM, if something is not explicitly allowed, it is denied. And an explicit `D
 
 ## Roadmap
 
-- [ ] Public files (`visibility` option) in `iam:policy`
-- [x] Support for several S3 disks with unique rule names
-- [x] Limit access to one folder with the `root` option
-- [ ] `--output` option to save the policy to a file
-- [ ] SQS support (queues)
-- [ ] SES support (emails)
-- [ ] Audit the app's own AWS key: is it too powerful?
-- [ ] More audit checks: old access keys, unused keys, admin users
+More features are coming soon.
 
 ---
 
