@@ -1,5 +1,5 @@
 {
-  "name": "houdaslassi/laravel-iam-audit",
+  "name": "houdaslassi/laravel-aws-iam-audit",
   "description": "Audit your AWS IAM configuration for common security issues, straight from Artisan.",
   "type": "library",
   "license": "MIT",
