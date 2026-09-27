@@ -2,6 +2,8 @@
 
 namespace IamAudit\Policy;
 
+use Illuminate\Support\Str;
+
 final class PolicyGenerator
 {
     public function generate(array $disks): array
@@ -16,6 +18,9 @@ final class PolicyGenerator
             $bucket = $disk['bucket'];
             $root = trim($disk['root'] ?? '', '/');
 
+            // Turn the disk name into a valid Sid part: "user-avatars" becomes "UserAvatars"
+            $label = Str::studly($name);
+
             if ($root === '') {
                 // No root folder: the app can access all files in the bucket
                 $path = '*';
@@ -24,9 +29,9 @@ final class PolicyGenerator
                 $path = "{$root}/*";
             }
 
-            // Rule 1: listing the bucket (NEW version, replaces the old one)
+            // Rule 1: listing the bucket
             $listStatement = [
-                'Sid' => 'ListS3Bucket',
+                'Sid' => "List{$label}Bucket",
                 'Effect' => 'Allow',
                 'Action' => ['s3:ListBucket'],
                 'Resource' => "arn:aws:s3:::{$bucket}",
@@ -43,10 +48,9 @@ final class PolicyGenerator
 
             $statements[] = $listStatement;
 
-            // Rule 2: reading, uploading, deleting files (UNCHANGED)
-
+            // Rule 2: reading, uploading, deleting files
             $statements[] = [
-                'Sid' => 'ManageS3Objects',
+                'Sid' => "Manage{$label}Objects",
                 'Effect' => 'Allow',
                 'Action' => ['s3:GetObject', 's3:PutObject', 's3:DeleteObject'],
                 'Resource' => "arn:aws:s3:::{$bucket}/{$path}",
